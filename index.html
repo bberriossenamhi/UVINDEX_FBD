@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SENAMHI · Índice UV</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+:root{
+--bg1:#081326;
+--bg2:#0f1f3d;
+--card:#f8f8f8;
+--text:#1e293b;
+--soft:#94a3b8;
+--red:#ef4444;
+--orange:#f59e0b;
+--yellow:#facc15;
+--green:#22c55e;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:'Plus Jakarta Sans',sans-serif;
+background:radial-gradient(circle at top left,#13294d,#081326 70%);
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
+}
+
+.dashboard{
+width:440px;
+max-width:100%;
+background:var(--card);
+border-radius:46px;
+overflow:hidden;
+box-shadow:0 40px 90px rgba(0,0,0,.45);
+}
+
+.header{
+padding:40px 40px 10px;
+display:flex;
+justify-content:space-between;
+align-items:flex-start;
+}
+
+.brand small{
+display:block;
+font-size:11px;
+font-weight:700;
+letter-spacing:2px;
+color:#64748b;
+margin-bottom:2px;
+}
+
+.brand h1{
+font-size:24px;
+font-weight:800;
+color:#0f172a;
+}
+
+.date{
+background:#e8edf2;
+padding:10px 18px;
+border-radius:40px;
+font-size:13px;
+font-weight:700;
+color:#334155;
+}
+
+.center{
+padding:10px 35px 0;
+text-align:center;
+}
+
+.circle{
+width:230px;
+height:230px;
+margin:auto;
+border-radius:50%;
+background:#fafafa;
+position:relative;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+box-shadow:inset 0 0 0 1px #f1f5f9;
+}
+
+.circle::after{
+content:'';
+position:absolute;
+inset:14px;
+border-radius:50%;
+border:3px solid transparent;
+border-top-color:#fecaca;
+border-right-color:#fca5a5;
+animation:spin 6s linear infinite;
+}
+
+@keyframes spin{
+from{transform:rotate(0deg);}
+to{transform:rotate(360deg);}
+}
+
+.label{
+font-size:12px;
+font-weight:700;
+color:#cbd5e1;
+margin-bottom:8px;
+z-index:2;
+}
+
+.uv-number{
+font-size:96px;
+font-weight:900;
+line-height:1;
+color:#1e293b;
+z-index:2;
+}
+
+.status{
+position:absolute;
+bottom:18px;
+padding:8px 24px;
+border-radius:40px;
+font-size:13px;
+font-weight:800;
+color:white;
+box-shadow:0 12px 28px rgba(0,0,0,.18);
+z-index:2;
+animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+0%,100%{transform:scale(1);}
+50%{transform:scale(1.05);}
+}
+
+.info{
+margin-top:28px;
+font-size:14px;
+font-weight:600;
+color:#64748b;
+}
+
+.info b{
+color:#f59e0b;
+}
+
+.trend{
+margin-top:10px;
+font-size:13px;
+font-weight:700;
+color:#ef4444;
+}
+
+.grid{
+padding:28px 35px;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:18px;
+}
+
+.item{
+text-align:center;
+}
+
+.icon{
+width:56px;
+height:56px;
+margin:auto;
+border-radius:18px;
+background:#eef2f6;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:24px;
+box-shadow:0 4px 10px rgba(0,0,0,.05);
+animation:float 3s ease-in-out infinite;
+}
+
+.item:nth-child(even) .icon{
+animation-delay:1.5s;
+}
+
+@keyframes float{
+0%,100%{transform:translateY(0);}
+50%{transform:translateY(-6px);}
+}
+
+.item span{
+display:block;
+margin-top:8px;
+font-size:10px;
+font-weight:800;
+color:#94a3b8;
+}
+
+.alert{
+margin:0 35px 24px;
+padding:16px;
+border-radius:24px;
+border:1px dashed #fca5a5;
+background:#fff1f2;
+display:flex;
+gap:12px;
+align-items:center;
+}
+
+.alert div{
+font-size:13px;
+font-weight:700;
+color:#9f1239;
+line-height:1.4;
+}
+
+.bottom{
+background:linear-gradient(180deg,#1b2b4a,#0b1730);
+padding:32px 35px 26px;
+border-radius:40px 40px 0 0;
+}
+
+.days{
+display:flex;
+justify-content:space-between;
+margin-bottom:22px;
+}
+
+.day{
+text-align:center;
+color:white;
+}
+
+.day small{
+display:block;
+font-size:11px;
+font-weight:700;
+color:#93c5fd;
+margin-bottom:6px;
+}
+
+.day strong{
+font-size:22px;
+font-weight:800;
+}
+
+.dot{
+width:14px;
+height:4px;
+background:#ff4d4d;
+border-radius:10px;
+margin:8px auto 0;
+box-shadow:0 0 8px rgba(255,77,77,.7);
+}
+
+.footer{
+padding-top:18px;
+border-top:1px solid rgba(255,255,255,.08);
+text-align:center;
+font-size:10px;
+letter-spacing:2px;
+font-weight:700;
+color:#64748b;
+}
+</style>
+</head>
+
+<body>
+
+<div class="dashboard">
+
+<div class="header">
+<div class="brand">
+<small>SENAMHI PERÚ</small>
+<h1>Índice UV</h1>
+</div>
+<div class="date">MAR 21 ABRIL</div>
+</div>
+
+<div class="center">
+
+<div class="circle">
+<div class="label">ACTUAL</div>
+<div class="uv-number">5</div>
+<div class="status" style="background:#f59e0b;">MODERADO</div>
+</div>
+
+<div class="info">
+Exposición recomendada: <b>Hasta 45 min</b>
+</div>
+
+<div class="trend">
+Tendencia: Índice 10 Muy Alto hacia las 12:00 PM
+</div>
+
+</div>
+
+<div class="grid">
+
+<div class="item">
+<div class="icon">🧴</div>
+<span>FPS 50+</span>
+</div>
+
+<div class="item">
+<div class="icon">🕶️</div>
+<span>LENTES</span>
+</div>
+
+<div class="item">
+<div class="icon">🧢</div>
+<span>GORRO</span>
+</div>
+
+<div class="item">
+<div class="icon">👕</div>
+<span>MANGA LARGA</span>
+</div>
+
+<div class="item">
+<div class="icon">⛱️</div>
+<span>SOMBRA</span>
+</div>
+
+<div class="item">
+<div class="icon">💧</div>
+<span>HIDRATACIÓN</span>
+</div>
+
+</div>
+
+<div class="alert">
+<div style="font-size:22px;">🚫</div>
+<div>
+Evitar exposición directa entre las<br>
+<b>11:00 AM y las 3:00 PM</b>
+</div>
+</div>
+
+<div class="bottom">
+
+<div class="days">
+
+<div class="day">
+<small>MIÉ 22</small>
+<strong>11</strong>
+<div class="dot"></div>
+</div>
+
+<div class="day">
+<small>JUE 23</small>
+<strong>10</strong>
+<div class="dot"></div>
+</div>
+
+<div class="day">
+<small>VIE 24</small>
+<strong>9</strong>
+<div class="dot"></div>
+</div>
+
+<div class="day">
+<small>SÁB 25</small>
+<strong>10</strong>
+<div class="dot"></div>
+</div>
+
+</div>
+
+<div class="footer">
+FUENTE: DIRECCIÓN ZONAL 6
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>
